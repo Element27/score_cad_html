@@ -1,0 +1,74 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url("../Gemini_Generated_Image_qoyqzwqoyqzwqoyq.png");
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-card {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 30px; 
+    width: 90%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.student-img {
+  width: 120px;
+  margin-bottom: 25px;
+}
+
+
+.login-input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1.5px solid #D1F2E5; 
+  border-radius: 15px;
+  background-color: #F0FFF9; 
+  box-sizing: border-box; 
+  outline: none;
+  font-size: 14px;
+}
+
+.login-input::placeholder {
+  color: #88BBA6;
+}
+
+
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 15px;
+  background-color: #FF8C82; 
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #FF7669;
+}
+
+/* Forgot Password link */
+.forgot-password {
+  display: block;
+  margin-top: 20px;
+  color: #5A8F7B;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.login-btn a {
+    text-decoration: none;
+    color: white;
+}
