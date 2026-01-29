@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result-Checker</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result-Checker</title>
+  <link rel="stylesheet" href="style/style.css">
 </head>
+
 <body>
-    <div class="login-container">
-  <div class="login-card">
-    <div class="illustration-container">
-      <img src="../logo for project.png" alt="Student Illustration" class="student-img">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="illustration-container">
+        <img src="logo.png" alt="Student Illustration" class="student-img">
+      </div>
+
+      <div class="input-group">
+        <input type="text" placeholder="Student ID" class="login-input" id="email-input">
+        <input type="password" placeholder="Password" class="login-input" id="password-input">
+      </div>
+
+      <button class="login-btn" id="login-btn">Sign up</button>
+
+      <p id="error-message"></p>
+
+      <a href="#" class="forgot-password">Forgot Password?</a>
     </div>
-
-    <div class="input-group">
-      <input type="text" placeholder="Student ID" class="login-input">
-      <input type="password" placeholder="Password" class="login-input">
-    </div>
-
-    <button class="login-btn"><a href="student.html">login</a></button>
-
-    <a href="#" class="forgot-password">Forgot Password?</a>
   </div>
-</div>
+
+  <script src="script/auth.js" type="module"></script>
+  <script src="script/supabase.js" type="module"></script>
+
 </body>
+
 </html>
