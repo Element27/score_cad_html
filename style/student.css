@@ -91,6 +91,7 @@ background: white;
   margin: auto;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   margin-top: 30px;
+  margin-bottom: 150px;
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -111,4 +112,34 @@ background: white;
   -webkit-transition: .2s;
   transition: opacity .2s;
   margin: 10px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #8AC9B1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer button {
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    border: none; 
+    cursor: pointer;
+}
+
+footer button:hover {
+    background-color: #427361;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    width: 150px;
+    padding: 10px;
+    transition: 10ms;
 }
