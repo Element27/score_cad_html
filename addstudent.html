@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
 
-<link rel="stylesheet" href="addstudent.css">
+<link rel="stylesheet" href="/style/addstudent.css">
     <title>Document</title>
 </head>
 <body>
@@ -112,18 +112,18 @@
            <div class="form-layout">
         <section class="form-card">
             <h1>Personal Identity</h1>
-            <input type="text" placeholder="👤 Full Name">
-            <select name="Gender">
+            <input type="text" placeholder="👤 Full Name" id="student_name" required>
+            <select name="Gender" id="student_gender" required>
                 <option value="" disabled selected>Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
-            <input type="date" placeholder="📅 Date of Birth">
+            <input type="date" placeholder="📅 Date of Birth" id="student_dob" required>
         </section>
 
         <section class="form-card">
             <h1>Class Assignment</h1>
-            <select name="Grade">
+            <select name="Grade" id="student_class" required>
                 <option value="" disabled selected>Select Grade Level</option>
                 <option value="ss1">SS1</option>
                 <option value="ss2">SS2</option>
@@ -138,21 +138,13 @@
         </section>
     </div>
 
-    <section class="form-card full-width">
-        <h1>Contact Information</h1>
-        <div class="triple-grid">
-            <input type="text" placeholder="📞 Phone Number">
-            <input type="email" placeholder="📧 Email Address">
-            <input type="text" placeholder="🏠 Home Address">
-        </div>
-    </section>
-
-    <div class="action-buttons">
-        <button class="btn-cancel">Cancel</button>
-        <button class="btn-save">Save Student</button>
+       <div class="action-buttons">
+        <button class="btn-cancel" id="cancel_btn">Cancel</button>
+        <button class="btn-save" id="save_btn">Save Student</button>
     </div>
 </div>
 </div>
     </div>
+    <script src="/script/addStudent.js" type="module"></script>
 </body>
 </html>
