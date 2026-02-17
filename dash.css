@@ -1,0 +1,161 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #88bba6;
+    font-family: poppins, sans-serif;
+}
+
+#head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icons button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+img {
+    margin-right: auto;
+    padding-right: 0%;
+}
+
+#header{
+    display: flex;
+    align-items: center;
+}
+
+#border{
+    border:none;
+    background-color: #d0e4db;
+    width: 80%;
+    border-radius: 25px;
+    height: 90vh;
+    overflow-y: scroll;
+    padding: 30px;
+}
+
+#container{
+    display: flex;
+    margin: 5vh 3vw;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+#sideNav {
+    margin-left: 50px;
+}
+
+#sideNav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sideNav ul li {
+    margin-bottom: 20px;
+}
+
+#sideNav ul li button {
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;   
+}
+
+#sideNav ul li button:hover {
+    background-color: #427361;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    cursor: pointer;
+    width: 150px;
+    padding: 10px;
+    transition: 10ms;
+}
+
+#sideNav ul li button svg {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.label {
+    border: 1px solid;
+    background-color: white;
+    padding-right: 150px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+.label:hover {
+    background-color: #bdf1de;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: 10ms;
+}
+
+.cards{
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.small {
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #d0e4db;
+    padding: 10px;
+}
+
+.con {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.small-2{
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #FFD1CC;
+    padding: 10px;
+}
+
+.borders{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.buttons button{
+     background-color: #FF8C82;
+    border: none; 
+    border-radius: 15px;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.buttons svg {
+    margin-right: 10px;
+    vertical-align: middle;
+}
