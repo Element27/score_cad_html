@@ -1,165 +1,156 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="/style/admindash.css">
+    <link rel="stylesheet" href="/style/admindash.css" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="container">
-        <div>
-            <div id="header">
-                <img src="../logo for project.png" alt="" width="100px">
-                <div>
-                <h4>GradGuid</h4>
-                <p>School Register</p>
-                </div>
-            </div>
-            <div id="sideNav">
-                <ul>
-                    <li>
-                        <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="black">
-                        <path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>
-                    </svg> Dashboard
-                    </button>
-                </li>
-                    <li><button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="black"><path d="M120-120q-33 0-56.5-23.5T40-200v-520h80v520h680v80H120Zm160-160q-33 0-56.5-23.5T200-360v-440q0-33 23.5-56.5T280-880h200l80 80h280q33 0 56.5 23.5T920-720v360q0 33-23.5 56.5T840-280H280Zm0-80h560v-360H527l-80-80H280v440Zm0 0v-440 440Z"/></svg>Subjects</button></li>
-                    <li><button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M197-96q-15 0-28-12.5T156-136v-102q0-86.45 53.5-152.72Q263-457 348-475q-38 28-59 68.91-21 40.92-21 88.09l-1 182q0 11 3.5 21t9.5 19h-83Zm141 0q-17 0-28.5-11.5T298-136v-181.96q0-67.04 47.53-114.54Q393.07-480 460.29-480h181.49q67.22 0 114.72 47.5T804-318.43v60.86q0 66.57-47.25 114.07T642-96H338Zm142-465q-63.49 0-107.75-43.95-44.25-43.94-44.25-107 0-63.05 44.25-107.55Q416.51-864 480-864t107.75 44.5Q632-775 632-711.95q0 63.06-44.25 107Q543.49-561 480-561Z"/></svg>Students</button></li>
-                    <li><button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M349.5-298.29q10.5-10.29 10.5-25.5t-10.29-25.71q-10.29-10.5-25.5-10.5t-25.71 10.29q-10.5 10.29-10.5 25.5t10.29 25.71q10.29 10.5 25.5 10.5t25.71-10.29Zm0-156q10.5-10.29 10.5-25.5t-10.29-25.71q-10.29-10.5-25.5-10.5t-25.71 10.29q-10.5 10.29-10.5 25.5t10.29 25.71q10.29 10.5 25.5 10.5t25.71-10.29Zm0-156q10.5-10.29 10.5-25.5t-10.29-25.71q-10.29-10.5-25.5-10.5t-25.71 10.29q-10.5 10.29-10.5 25.5t10.29 25.71q10.29 10.5 25.5 10.5t25.71-10.29ZM432-288h240v-72H432v72Zm0-156h240v-72H432v72Zm0-156h240v-72H432v72ZM216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h528q29.7 0 50.85 21.15Q816-773.7 816-744v528q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm0-72h528v-528H216v528Zm0-528v528-528Z"/></svg>Scores</button></li>
-                    <li><button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="m403-96-22-114q-23-9-44.5-21T296-259l-110 37-77-133 87-76q-2-12-3-24t-1-25q0-13 1-25t3-24l-87-76 77-133 110 37q19-16 40.5-28t44.5-21l22-114h154l22 114q23 9 44.5 21t40.5 28l110-37 77 133-87 76q2 12 3 24t1 25q0 13-1 25t-3 24l87 76-77 133-110-37q-19 16-40.5 28T579-210L557-96H403Zm59-72h36l19-99q38-7 71-26t57-48l96 32 18-30-76-67q6-17 9.5-35.5T696-480q0-20-3.5-38.5T683-554l76-67-18-30-96 32q-24-29-57-48t-71-26l-19-99h-36l-19 99q-38 7-71 26t-57 48l-96-32-18 30 76 67q-6 17-9.5 35.5T264-480q0 20 3.5 38.5T277-406l-76 67 18 30 96-32q24 29 57 48t71 26l19 99Zm18-168q60 0 102-42t42-102q0-60-42-102t-102-42q-60 0-102 42t-42 102q0 60 42 102t102 42Zm0-144Z"/></svg>Settings</button></li>
-                </ul>
+      <div>
+        <div id="header">
+          <img src="../logo for project.png" alt="" width="100px" />
+          <div>
+            <h4>GradGuid</h4>
+            <p>School Register</p>
+          </div>
         </div>
-       
+        <div id="sideNav">
+          <ul>
+            <li>
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="20px"
+                  viewBox="0 -960 960 960"
+                  width="20px"
+                  fill="black"
+                >
+                  <path
+                    d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"
+                  />
+                </svg>
+                Dashboard
+              </button>
+            </li>
+            <li>
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="20px"
+                  viewBox="0 -960 960 960"
+                  width="20px"
+                  fill="black"
+                >
+                  <path
+                    d="M120-120q-33 0-56.5-23.5T40-200v-520h80v520h680v80H120Zm160-160q-33 0-56.5-23.5T200-360v-440q0-33 23.5-56.5T280-880h200l80 80h280q33 0 56.5 23.5T920-720v360q0 33-23.5 56.5T840-280H280Zm0-80h560v-360H527l-80-80H280v440Zm0 0v-440 440Z"
+                  /></svg
+                >Subjects
+              </button>
+            </li>
+            <li>
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="20px"
+                  viewBox="0 -960 960 960"
+                  width="20px"
+                  fill="#000000"
+                >
+                  <path
+                    d="M197-96q-15 0-28-12.5T156-136v-102q0-86.45 53.5-152.72Q263-457 348-475q-38 28-59 68.91-21 40.92-21 88.09l-1 182q0 11 3.5 21t9.5 19h-83Zm141 0q-17 0-28.5-11.5T298-136v-181.96q0-67.04 47.53-114.54Q393.07-480 460.29-480h181.49q67.22 0 114.72 47.5T804-318.43v60.86q0 66.57-47.25 114.07T642-96H338Zm142-465q-63.49 0-107.75-43.95-44.25-43.94-44.25-107 0-63.05 44.25-107.55Q416.51-864 480-864t107.75 44.5Q632-775 632-711.95q0 63.06-44.25 107Q543.49-561 480-561Z"
+                  /></svg
+                >Students
+              </button>
+            </li>
+            <li>
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="20px"
+                  viewBox="0 -960 960 960"
+                  width="20px"
+                  fill="#000000"
+                >
+                  <path
+                    d="M349.5-298.29q10.5-10.29 10.5-25.5t-10.29-25.71q-10.29-10.5-25.5-10.5t-25.71 10.29q-10.5 10.29-10.5 25.5t10.29 25.71q10.29 10.5 25.5 10.5t25.71-10.29Zm0-156q10.5-10.29 10.5-25.5t-10.29-25.71q-10.29-10.5-25.5-10.5t-25.71 10.29q-10.5 10.29-10.5 25.5t10.29 25.71q10.29 10.5 25.5 10.5t25.71-10.29Zm0-156q10.5-10.29 10.5-25.5t-10.29-25.71q-10.29-10.5-25.5-10.5t-25.71 10.29q-10.5 10.29-10.5 25.5t10.29 25.71q10.29 10.5 25.5 10.5t25.71-10.29ZM432-288h240v-72H432v72Zm0-156h240v-72H432v72Zm0-156h240v-72H432v72ZM216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h528q29.7 0 50.85 21.15Q816-773.7 816-744v528q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm0-72h528v-528H216v528Zm0-528v528-528Z"
+                  /></svg
+                >Scores
+              </button>
+            </li>
+            <li>
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="20px"
+                  viewBox="0 -960 960 960"
+                  width="20px"
+                  fill="#000000"
+                >
+                  <path
+                    d="m403-96-22-114q-23-9-44.5-21T296-259l-110 37-77-133 87-76q-2-12-3-24t-1-25q0-13 1-25t3-24l-87-76 77-133 110 37q19-16 40.5-28t44.5-21l22-114h154l22 114q23 9 44.5 21t40.5 28l110-37 77 133-87 76q2 12 3 24t1 25q0 13-1 25t-3 24l87 76-77 133-110-37q-19 16-40.5 28T579-210L557-96H403Zm59-72h36l19-99q38-7 71-26t57-48l96 32 18-30-76-67q6-17 9.5-35.5T696-480q0-20-3.5-38.5T683-554l76-67-18-30-96 32q-24-29-57-48t-71-26l-19-99h-36l-19 99q-38 7-71 26t-57 48l-96-32-18 30 76 67q-6 17-9.5 35.5T264-480q0 20 3.5 38.5T277-406l-76 67 18 30 96-32q24 29 57 48t71 26l19 99Zm18-168q60 0 102-42t42-102q0-60-42-102t-102-42q-60 0-102 42t-42 102q0 60 42 102t102 42Zm0-144Z"
+                  /></svg
+                >Settings
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="border">
+        <h3>Enter score entries here</h3>
+        <div id="form">
+          <div>
+            <strong><label for="select subject">Select subject:</label></strong
+            ><br />
+
+            <select name="subjects" id="subjects" class="label">
+              <option value="mathematics">Mathematics</option>
+              <option value="english">English</option>
+              <option value="science">Science</option>
+            </select>
+          </div>
+          <div>
+            <strong><label for="Grade Type">Select Grade Type:</label></strong
+            ><br />
+
+            <select name="gradeType" id="gradeType" class="label">
+              <option value="Test">Test</option>
+              <option value="Exam">Exam</option>
+              <option value="Assignment">Assignment</option>
+            </select>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Test Score (30%)</th>
+              <th>Exam Score (70%)</th>
+              <th>Total Grade</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="student_table_body">
+            <!--  -->
+          </tbody>
+        
+        </table>
+        <div id="buttons">
+          <button id="saveDraftBtn">Save Draft</button>
+          <button id="publishResultsBtn">Publish Results</button>
+        </div>
+      </div>
     </div>
-     <div id="border">
-            <h3>Enter score entries here</h3>
-            <div id="form">
-                <div>
-                <strong><label for="select subject">Select subject:</label></strong><br>
 
-                    <select name="subjects" id="subjects" class="label">
-                        <option value="mathematics">Mathematics</option>
-                        <option value="english">English</option>
-                        <option value="science">Science</option>
-                    </select>
-            </div>
-            <div>
-                    <strong><label for="Grade Type">Select Grade Type:</label></strong><br>
-
-                    <select name="gradeType" id="gradeType" class="label">
-                        <option value="Test">Test</option>
-                        <option value="Exam">Exam</option>
-                        <option value="Assignment">Assignment</option>
-                    </select>
-            </div>
-        </div>
-<table>
-  <tr>
-    <th>Student ID</th>
-    <th>Name</th>
-    <th>Test Score (30%)</th>
-    <th>Exam Score (70%)</th>
-    <th>Total Grade</th>
-    <th>Action</th>
-  </tr>
-  <tr>
-    <td>500145</td>
-    <td>Alex Jackson</td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td>A</td>
-    <td>
-        <div class="button-b">
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M96 0v-192h768V0H96Zm168-360h51l279-279-26-27-25-24-279 279v51Zm-72 72v-152.92L594-843q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24.1 15.94L747-792q11 11 16 24t5 27.4q0 13.49-4.95 26.54-4.95 13.05-15.75 23.85L345-288H192Zm503-455-51-49 51 49ZM594-639l-26-27-25-24 51 51Z"/></svg></button>
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/></svg> </button>
-        </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td>500145</td>
-    <td>Alex Jackson</td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td>A</td>
-    <td>
-        <div class="button-b">
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M96 0v-192h768V0H96Zm168-360h51l279-279-26-27-25-24-279 279v51Zm-72 72v-152.92L594-843q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24.1 15.94L747-792q11 11 16 24t5 27.4q0 13.49-4.95 26.54-4.95 13.05-15.75 23.85L345-288H192Zm503-455-51-49 51 49ZM594-639l-26-27-25-24 51 51Z"/></svg></button>
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/></svg> </button>
-        </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td>500145</td>
-    <td>Alex Jackson</td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td>A</td>
-    <td>
-        <div class="button-b">
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M96 0v-192h768V0H96Zm168-360h51l279-279-26-27-25-24-279 279v51Zm-72 72v-152.92L594-843q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24.1 15.94L747-792q11 11 16 24t5 27.4q0 13.49-4.95 26.54-4.95 13.05-15.75 23.85L345-288H192Zm503-455-51-49 51 49ZM594-639l-26-27-25-24 51 51Z"/></svg></button>
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/></svg> </button>
-        </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td>500145</td>
-    <td>Alex Jackson</td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td>A</td>
-    <td>
-        <div class="button-b">
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M96 0v-192h768V0H96Zm168-360h51l279-279-26-27-25-24-279 279v51Zm-72 72v-152.92L594-843q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24.1 15.94L747-792q11 11 16 24t5 27.4q0 13.49-4.95 26.54-4.95 13.05-15.75 23.85L345-288H192Zm503-455-51-49 51 49ZM594-639l-26-27-25-24 51 51Z"/></svg></button>
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/></svg> </button>
-        </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td>500145</td>
-    <td>Alex Jackson</td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td>A</td>
-    <td>
-        <div class="button-b">
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M96 0v-192h768V0H96Zm168-360h51l279-279-26-27-25-24-279 279v51Zm-72 72v-152.92L594-843q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24.1 15.94L747-792q11 11 16 24t5 27.4q0 13.49-4.95 26.54-4.95 13.05-15.75 23.85L345-288H192Zm503-455-51-49 51 49ZM594-639l-26-27-25-24 51 51Z"/></svg></button>
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/></svg> </button>
-        </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td>500145</td>
-    <td>Alex Jackson</td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td><input type="text" placeholder="Enter score"></td>
-    <td>A</td>
-    <td>
-        <div class="button-b">
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M96 0v-192h768V0H96Zm168-360h51l279-279-26-27-25-24-279 279v51Zm-72 72v-152.92L594-843q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24.1 15.94L747-792q11 11 16 24t5 27.4q0 13.49-4.95 26.54-4.95 13.05-15.75 23.85L345-288H192Zm503-455-51-49 51 49ZM594-639l-26-27-25-24 51 51Z"/></svg></button>
-        <button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/></svg> </button>
-        </div>
-    </td>
-  </tr>
-
- 
-</table>
-<div id="buttons">
-<button id="saveDraftBtn">Save Draft</button>
-<button id="publishResultsBtn">Publish Results</button>
-</div>
-    </div>
-        </div>
-</body>
+    <script src="/script/addStudent.js" type="module"></script>
+  </body>
 </html>
