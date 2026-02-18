@@ -10,19 +10,70 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="/style/admindash.css" />
+    <link rel="stylesheet" href="/style/classassignement.css" />
     <title>Document</title>
   </head>
   <body>
-    <div id="container">
-      <div>
+    <head>
+      <div id="head">
         <div id="header">
-          <img src="/assets/logo for project.png" alt="" width="100px" />
+          <img
+            src="/assets/logo for project.png"
+            alt=""
+            width="100px"
+          />
           <div>
             <h4>GradGuid</h4>
             <p>School Register</p>
           </div>
         </div>
+
+        <div class="icons">
+          <button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="30px"
+              viewBox="0 -960 960 960"
+              width="30px"
+              fill="#000000"
+            >
+              <path
+                d="M168-192q-29.7 0-50.85-21.16Q96-234.32 96-264.04v-432.24Q96-726 117.15-747T168-768h624q29.7 0 50.85 21.16Q864-725.68 864-695.96v432.24Q864-234 842.85-213T792-192H168Zm312-240L168-611v347h624v-347L480-432Zm0-85 312-179H168l312 179Zm-312-94v-85 432-347Z"
+              />
+            </svg>
+          </button>
+          <button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="30px"
+              viewBox="0 -960 960 960"
+              width="30px"
+              fill="#000000"
+            >
+              <path
+                d="M192-216v-72h48v-240q0-87 53.5-153T432-763v-53q0-20 14-34t34-14q20 0 34 14t14 34v53q85 16 138.5 82T720-528v240h48v72H192Zm288-276Zm-.21 396Q450-96 429-117.15T408-168h144q0 30-21.21 51t-51 21ZM312-288h336v-240q0-70-49-119t-119-49q-70 0-119 49t-49 119v240Z"
+              />
+            </svg>
+          </button>
+          <button>
+            <img src="/assets/profile photo.png" alt="" width="60px" />
+          </button>
+          <button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#000000"
+            >
+              <path d="M480-360 280-560h400L480-360Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </head>
+    <div id="container">
+      <div>
         <div id="sideNav">
           <ul>
             <li>
@@ -90,52 +141,56 @@
         </div>
       </div>
       <div id="border">
-        <h3>Enter score entries here</h3>
-        <div id="form">
-          <div>
-            <strong><label for="select subject">Select subject:</label></strong
-            ><br />
-
-            <select name="subjects" id="subjects" class="label">
-              <option value="mathematics">Mathematics</option>
-              <option value="english">English</option>
-              <option value="science">Science</option>
+        <section class="class-assignment-section">
+    <h1>Class Assignment</h1>
+    <p>Select a Grade Level to assign specific subjects to it.</p>
+    
+    <div class="assignment-controls">
+        <div class="selection-group">
+            <label>Select Grade Level</label>
+            <select name="target-grade" class="assignment-select">
+                <option value="">-- Choose Grade --</option>
+                <option value="ss1">Grade 10 (SS1)</option>
+                <option value="ss2">Grade 11 (SS2)</option>
+                <option value="ss3">Grade 12 (SS3)</option>
             </select>
-          </div>
-          <div>
-            <strong><label for="Grade Type">Select Grade Type:</label></strong
-            ><br />
+        </div>
 
-            <select name="gradeType" id="gradeType" class="label">
-              <option value="Test">Test</option>
-              <option value="Exam">Exam</option>
-              <option value="Assignment">Assignment</option>
-            </select>
-          </div>
+        <div class="subject-picker">
+            <label>Available Subjects (Click to add)</label>
+            <div class="subject-tags">
+                <label class="tag"><input type="checkbox"> <span>Mathematics</span></label>
+                <label class="tag"><input type="checkbox"> <span>Physics</span></label>
+                <label class="tag"><input type="checkbox"> <span>English Lit</span></label>
+                <label class="tag"><input type="checkbox"> <span>Chemistry</span></label>
+            </div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Student ID</th>
-              <th>Name</th>
-              <th>Test Score (30%)</th>
-              <th>Exam Score (70%)</th>
-              <th>Total Grade</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="student_table_body">
-            <!--  -->
-          </tbody>
-        
-        </table>
-        <div id="buttons">
-          <button id="saveDraftBtn">Save Draft</button>
-          <button id="publishResultsBtn">Publish Results</button>
-        </div>
-      </div>
     </div>
 
-    <script src="/script/addStudent.js" type="module"></script>
+    <div class="associated-display">
+        <h3>Associated Subjects for Selected Class</h3>
+        <div class="assigned-list">
+            <div class="mini-card">
+                <span class="card-icon">🧪</span>
+                <span>Chemistry</span>
+            </div>
+            <div class="mini-card">
+                <span class="card-icon">📐</span>
+                <span>Mathematics</span>
+            </div>
+            <div class="mini-card">
+                <span class="card-icon">🌍</span>
+                <span>History</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="button" class="btn-cancel">Cancel</button>
+        <button type="submit" class="btn-save">Save Association</button>
+    </div>
+</section>
+      </div>
+    </div>
   </body>
 </html>
