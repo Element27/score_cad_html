@@ -10,7 +10,16 @@ Read
 
  Update
  Delete
+
+
+
+ M- model (structure)
+ V- view (visual)
+ C- controller (connection)
 */
+
+import {fetchAllStudent, addNewStudent,deleteStudent} from './studentFunctions.js'
+
 
 const studentName = document.getElementById("student_name");
 const studentGender = document.getElementById("student_gender");
@@ -19,17 +28,12 @@ const studentClass = document.getElementById("student_class");
 const cancelBtn = document.getElementById("cancel_btn");
 const saveBtn = document.getElementById("save_btn");
 
-const rawStudentData = localStorage.getItem("allStudentData");
+// const rawStudentData = localStorage.getItem("allStudentData");
 // console.log("rawStudentData", rawStudentData);
 
-let allStudentData = [];
+const allStudentData = fetchAllStudent();
 
-const fetchAllStudent = () => {
-  const rawStudentData = localStorage.getItem("allStudentData");
-  // console.log("rawStudentData", rawStudentData);
 
-  allStudentData = JSON.parse(rawStudentData) || [];
-};
 
 const table_body = document.getElementById("student_table_body");
 
@@ -44,7 +48,7 @@ const populateStudentData = () => {
             <td>NA</td>
             <td>
               <div class="button-b">
-                <button>
+                <button class="edit_btn">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="20px"
@@ -57,7 +61,7 @@ const populateStudentData = () => {
                     />
                   </svg>
                 </button>
-                <button>
+                <button class="delete_btn" id="${data.id}" data-id="${data.id}">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="20px"
@@ -73,19 +77,20 @@ const populateStudentData = () => {
               </div>
             </td>
           </tr>`;
-    }).join(",");
+    }).join("");
     table_body ? (table_body.innerHTML = mappedData) : null;
   }
 };
 
-fetchAllStudent();
+
 populateStudentData();
 
 // console.log("allStudentData", allStudentData);
 
 saveBtn &&
-  saveBtn.addEventListener("click", () => {
-    if (studentName.value.trim().length == 0) {
+  saveBtn.addEventListener("click", ()=>{
+    
+     if (studentName.value.trim().length == 0) {
       alert("Please enter name");
       return;
     } else if (studentGender.value.trim().length == 0) {
@@ -99,56 +104,18 @@ saveBtn &&
       return;
     }
 
-    const student_id = crypto.randomUUID();
 
-    console.log("studentName", studentName.value);
-    console.log("studentGender", studentGender.value);
-    console.log("studentDOB", studentDOB.value);
-    console.log("studentClass", studentClass.value);
-    console.log("student_id", student_id);
+    addNewStudent({name:studentName.value, gender:studentGender.value, dob:studentDOB.value, studentClass: studentClass.value })
+  })
 
-    //json (javascript object notation)
-    const studentData = {
-      id: student_id,
-      name: studentName.value,
-      gender: studentGender.value,
-      dob: studentDOB.value,
-      class: studentClass.value,
-      subject: [],
-    };
 
-    allStudentData.push(studentData);
-    localStorage.setItem("allStudentData", JSON.stringify(allStudentData));
-
-    alert("student added");
-    window.location.href = "/admindash.html"
-
-    /*
-[{
-  "id":""
-  "name":"",
-  "gender":"",
-  dob:"",
-  "class": ""
-  "subject":[
-  {
-  "name":"",
-  "ca_score":30,
-  "exam_score":70,
-  "total_score":100
-  },
-  {
-  "name":"",
-  "ca_score":30,
-  "exam_score":70,
-  "total_score":100
-  },
-  {
-  "name":"",
-  "ca_score":30,
-  "exam_score":70,
-  "total_score":100
-  },  ]
-  }  ]
-  */
-  });
+  const deleteBtns = document.querySelectorAll(".delete_btn")
+ 
+  // console.log("deleteBtns", deleteBtns)
+  
+  deleteBtns.forEach(btn => {
+    btn.addEventListener("click", (e)=>{
+      // console.log(e.currentTarget.id) 
+      deleteStudent({id: e.currentTarget.id})
+    })
+  })
