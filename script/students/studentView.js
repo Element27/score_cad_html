@@ -18,8 +18,11 @@ Read
  C- controller (connection)
 */
 
-import {fetchAllStudent, addNewStudent,deleteStudent} from './studentFunctions.js'
-
+import {
+  fetchAllStudent,
+  addNewStudent,
+  deleteStudent,
+} from "./studentFunctions.js";
 
 const studentName = document.getElementById("student_name");
 const studentGender = document.getElementById("student_gender");
@@ -33,14 +36,13 @@ const saveBtn = document.getElementById("save_btn");
 
 const allStudentData = fetchAllStudent();
 
-
-
 const table_body = document.getElementById("student_table_body");
 
 const populateStudentData = () => {
   if (allStudentData.length > 0) {
-    const mappedData = allStudentData.map((data) => {
-      return `<tr>
+    const mappedData = allStudentData
+      .map((data) => {
+        return `<tr>
             <td>${data.id}</td>
             <td>${data.name}</td>
             <td><input type="text" placeholder="Enter score" /></td>
@@ -48,7 +50,7 @@ const populateStudentData = () => {
             <td>NA</td>
             <td>
               <div class="button-b">
-                <button class="edit_btn">
+                <button class="edit_btn" id="${data.id}">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="20px"
@@ -77,20 +79,19 @@ const populateStudentData = () => {
               </div>
             </td>
           </tr>`;
-    }).join("");
+      })
+      .join("");
     table_body ? (table_body.innerHTML = mappedData) : null;
   }
 };
-
 
 populateStudentData();
 
 // console.log("allStudentData", allStudentData);
 
 saveBtn &&
-  saveBtn.addEventListener("click", ()=>{
-    
-     if (studentName.value.trim().length == 0) {
+  saveBtn.addEventListener("click", () => {
+    if (studentName.value.trim().length == 0) {
       alert("Please enter name");
       return;
     } else if (studentGender.value.trim().length == 0) {
@@ -104,18 +105,29 @@ saveBtn &&
       return;
     }
 
+    addNewStudent({
+      name: studentName.value,
+      gender: studentGender.value,
+      dob: studentDOB.value,
+      studentClass: studentClass.value,
+    });
+  });
 
-    addNewStudent({name:studentName.value, gender:studentGender.value, dob:studentDOB.value, studentClass: studentClass.value })
-  })
+const deleteBtns = document.querySelectorAll(".delete_btn");
 
+// console.log("deleteBtns", deleteBtns)
 
-  const deleteBtns = document.querySelectorAll(".delete_btn")
- 
-  // console.log("deleteBtns", deleteBtns)
-  
-  deleteBtns.forEach(btn => {
-    btn.addEventListener("click", (e)=>{
-      // console.log(e.currentTarget.id) 
-      deleteStudent({id: e.currentTarget.id})
-    })
-  })
+deleteBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    // console.log(e.currentTarget.id)
+    deleteStudent({ id: e.currentTarget.id });
+  });
+});
+
+const editBtns = document.querySelectorAll(".edit_btn");
+
+editBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    window.location.href = `/editStudent.html?id=${e.currentTarget.id}`;
+  });
+});
