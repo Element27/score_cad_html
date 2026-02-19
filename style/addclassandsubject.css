@@ -1,0 +1,181 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #88bba6;
+    font-family: poppins, sans-serif;
+}
+
+#head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icons button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+img {
+    margin-right: auto;
+    padding-right: 0%;
+}
+
+#header{
+    display: flex;
+    align-items: center;
+}
+
+#border{
+    border:none;
+    background-color: #d0e4db;
+    width: 80%;
+    border-radius: 25px;
+    height: 90vh;
+    overflow-y: scroll;
+    padding: 30px;
+}
+
+#container{
+    display: flex;
+    margin: 5vh 3vw;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+#sideNav {
+    margin-left: 50px;
+}
+
+#sideNav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sideNav ul li {
+    margin-bottom: 20px;
+}
+
+#sideNav ul li button {
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;   
+}
+
+#sideNav ul li button:hover {
+    background-color: #427361;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    cursor: pointer;
+    width: 150px;
+    padding: 10px;
+    transition: 10ms;
+}
+
+#sideNav ul li button svg {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Creator Section Styles */
+.creator-wrapper {
+    margin-top: 30px;
+}
+
+.creator-row {
+    display: flex;
+    gap: 25px;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.creator-card {
+    flex-direction: column !important; /* Forces vertical stack inside the card */
+    align-items: flex-start !important;
+    width: 48% !important;
+    padding: 25px !important;
+    height: auto !important;
+}
+
+.card-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.creator-title {
+    font-size: 18px;
+    color: #333;
+}
+
+.creator-form {
+    width: 100%;
+}
+
+.creator-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d0e4db;
+    border-radius: 10px;
+    background-color: #f9fbfb;
+    margin-bottom: 15px;
+    font-family: inherit;
+}
+
+.selection-text {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Subject Chips (The selection area) */
+.subject-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.chip {
+    background-color: #e8f2ee;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #427361;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.chip:hover {
+    background-color: #bdf1de;
+}
+
+/* Button override for the Creator Section */
+.creator-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0 !important;
+    display: block;
+    background-color: #bdf1de !important;
+    border: none !important;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.creator-btn:hover {
+    background-color: #427361 !important;
+    color: white !important;
+}
