@@ -53,6 +53,10 @@ img {
     margin-top: auto;
 }
 
+#container a {
+    text-decoration: none;
+    color: inherit;
+}
 #sideNav {
     margin-left: 50px;
 }

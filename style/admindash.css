@@ -174,3 +174,8 @@ table input{
     justify-content: flex-end;
     gap: 10px;
 }
+
+#container a {
+    text-decoration: none;
+    color: inherit;
+}

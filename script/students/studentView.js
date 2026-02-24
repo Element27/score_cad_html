@@ -131,3 +131,41 @@ editBtns.forEach((btn) => {
     window.location.href = `/editStudent.html?id=${e.currentTarget.id}`;
   });
 });
+
+const classDropdown = document.getElementById("student_class");
+
+function loadClasses() {
+
+  let classes = JSON.parse(localStorage.getItem("classes")) || [];
+  classes.forEach(function(cls){
+
+    const option = document.createElement("option");
+    option.value = cls.name;
+    option.textContent = cls.name;
+    classDropdown.appendChild(option);
+  });
+}
+
+loadClasses();
+
+const subjectContainer = document.querySelector(".subject-tags");
+classDropdown.addEventListener("change", function() {
+const selectedClassName = classDropdown.value;
+
+let classes = JSON.parse(localStorage.getItem("classes")) || [];
+
+const selectedClass = classes.find(function(cls){
+  return cls.name === selectedClassName;
+});
+
+subjectContainer.innerHTML = "";
+if (selectedClass) {
+  selectedClass.subjects.forEach(function(subject){
+    const tag = document.createElement("span");
+    tag.classList.add("chip");
+    tag.textContent = subject;
+
+    subjectContainer.appendChild(tag);
+  });
+}
+});

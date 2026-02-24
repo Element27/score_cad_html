@@ -143,3 +143,8 @@ footer button:hover {
     padding: 10px;
     transition: 10ms;
 }
+
+#container a {
+    text-decoration: none;
+    color: inherit;
+}

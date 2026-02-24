@@ -236,3 +236,8 @@ input, select {
 .btn-save:hover {
     background-color: #ff7666;
 }
+
+#container a {
+    text-decoration: none;
+    color: inherit;
+}
