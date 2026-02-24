@@ -165,3 +165,8 @@ img {
     color: black;
     font-weight: bold;
 }
+
+#container a {
+    text-decoration: none;
+    color: inherit;
+}

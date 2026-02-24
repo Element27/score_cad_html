@@ -204,3 +204,7 @@ img {
     border-radius: 25px;
     cursor: pointer;
 }
+#container a {
+    text-decoration: none;
+    color: inherit;
+}

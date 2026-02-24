@@ -50,3 +50,8 @@ body {
     height: 10px;
     border-radius: 100%;
 }
+
+#container a {
+    text-decoration: none;
+    color: inherit;
+}
