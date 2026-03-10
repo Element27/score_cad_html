@@ -226,3 +226,8 @@ table tr button {
     align-items: center;
     justify-content: space-between;
 }
+
+.toggelvisibility {
+    display: none;
+    
+}
