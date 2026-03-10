@@ -60,3 +60,6 @@ alert("Class added successfully");
 
 
 
+
+
+renderSubjects();
