@@ -43,7 +43,7 @@ const addNewStudent = ({ name, gender, dob, studentClass }) => {
 
 const deleteStudent = ({ id }) => {
   console.log("allStudentData", allStudentData);
-  // console.log("student id", id)
+  // console.log("student id", id)`   
 
   const remainingStudent = allStudentData.filter(
     (student) => student.id !== id,

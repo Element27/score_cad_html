@@ -11,14 +11,13 @@ function saveSubjects(subjects) {
   localStorage.setItem("subjects", JSON.stringify(subjects));
 }
 
-function rendersubjects(){
-  
+function rendersubjects() {
   const subjects = getSubjects();
-  console.log(subjects)
+  // console.log(subjects);
 
   subjectTableBody.innerHTML = "";
 
-  subjects.forEach(subject => {
+  subjects.forEach((subject) => {
     const row = `
     <tr>
       <td>${subject.id}</td>
@@ -30,28 +29,27 @@ function rendersubjects(){
     </tr>
     `;
     subjectTableBody.innerHTML += row;
-  })
+
+    renderSubjectChips();
+  });
 
   attachDeleteEvents();
   attachEditEvents();
 }
 
-addSubjectBtn.addEventListener("click", function(){
+addSubjectBtn.addEventListener("click", function () {
   const name = subjectInput.value.trim();
 
-
-  if(name.length === 0){
-    alert ("please enter subject name");
+  if (name.length === 0) {
+    alert("please enter subject name");
     return;
   }
 
+  const subjects = getSubjects();
 
-
-  const subjects = getSubjects ();
-  
   const newSubject = {
     id: crypto.randomUUID(),
-    name: name
+    name: name,
   };
 
   subjects.push(newSubject);
@@ -63,33 +61,36 @@ addSubjectBtn.addEventListener("click", function(){
 });
 
 let subjectToEdit = null;
-editSubjectBtn.addEventListener("click", function (){
+editSubjectBtn.addEventListener("click", function () {
   const name = subjectInput.value.trim();
-console.log(subjectToEdit)
-  if(name.length === 0){
-    alert ("please enter subject name");
+  console.log(subjectToEdit);
+  if (name.length === 0) {
+    alert("please enter subject name");
     return;
   }
-subjectToEdit.name = name;
-  const subjects = getSubjects ();
-  let updatedSubjects = subjects.filter(s => s.id !== subjectToEdit.id)
-  console.log(updatedSubjects)
-  updatedSubjects = [...updatedSubjects, subjectToEdit]
-  console.log(updatedSubjects)
-   localStorage.setItem("subjects", JSON.stringify(updatedSubjects));
-   rendersubjects();
+  subjectToEdit.name = name;
+  const subjects = getSubjects();
+  let updatedSubjects = subjects.filter((s) => s.id !== subjectToEdit.id);
+  console.log(updatedSubjects);
+  updatedSubjects = [...updatedSubjects, subjectToEdit];
+  console.log(updatedSubjects);
+  localStorage.setItem("subjects", JSON.stringify(updatedSubjects));
+  subjectInput.value = "";
+  editSubjectBtn.classList.toggle("toggelvisibility");
+  addSubjectBtn.classList.toggle("toggelvisibility");
+  rendersubjects();
 });
 
-function attachDeleteEvents(){
+function attachDeleteEvents() {
   const deleteButtons = document.querySelectorAll(".delete_btn");
 
-  deleteButtons.forEach(button => {
-    button.addEventListener("click", function (){
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", function () {
       const id = this.dataset.id;
 
       let subjects = getSubjects();
 
-      subjects = subjects.filter(subject => subject.id !== id);
+      subjects = subjects.filter((subject) => subject.id !== id);
 
       saveSubjects(subjects);
       rendersubjects();
@@ -97,25 +98,101 @@ function attachDeleteEvents(){
   });
 }
 
-
-
-function attachEditEvents(){
+function attachEditEvents() {
   const editButtons = document.querySelectorAll(".edit_btn");
 
-  editButtons.forEach(button => {
-    button.addEventListener("click", function (){
+  editButtons.forEach((button) => {
+    button.addEventListener("click", function () {
       const id = this.dataset.id;
       let subjects = getSubjects();
-      subjectToEdit = subjects.find(subject => subject.id === id);
+      subjectToEdit = subjects.find((subject) => subject.id === id);
       // const newName = prompt("Enter new subject name", subjectToEdit.name);
       subjectInput.value = subjectToEdit.name;
       editSubjectBtn.classList.toggle("toggelvisibility");
       addSubjectBtn.classList.toggle("toggelvisibility");
-      
-      
     });
   });
 }
 
+// chips
+
+const classInput = document.getElementById("class_input");
+const addClassBtn = document.getElementById("add_class_btn");
+
+function renderSubjectChips() {
+  const subjects = getSubjects();
+  const subjectChipsContainer = document.getElementById("subject_chips");
+  subjectChipsContainer.innerHTML = "";
+
+  if (subjects.length > 0) {
+    const chipsItem = subjects
+      .map((sub) => {
+        return `<span class="chip" data-id=${sub.id}>${sub.name}</span>`;
+      })
+      .join("");
+
+    subjectChipsContainer.innerHTML = chipsItem;
+  }
+}
 
 rendersubjects();
+renderSubjectChips();
+
+
+// this should be in a function
+const classRawData = localStorage.getItem("allClassData");
+
+const allClassData = classRawData ? JSON.stringify(classRawData) : [];
+
+const allChips = document.querySelectorAll(".chip");
+
+const newClassData = {
+  name: "",
+  subjects: [],
+};
+
+allChips.forEach((chip) => {
+  // console.log(chip);
+
+  chip.addEventListener("click", function () {
+    const chip_id = this.dataset.id;
+    // console.log("click", chip_id);
+
+    const idExist = newClassData.subjects.includes(chip_id);
+
+    console.log(idExist);
+
+    if (idExist) {
+      newClassData.subjects = newClassData.subjects.filter(
+        (id) => id !== chip_id,
+      );
+      chip.classList.toggle("chip_active");
+    } else {
+      newClassData.subjects.push(chip_id);
+      chip.classList.toggle("chip_active");
+    }
+
+  });
+});
+
+
+addClassBtn.addEventListener("click", ()=> {
+
+  const _name = classInput.value;
+  
+  if(_name.length < 1) alert("enter a valid name");
+  if(newClassData.length < 1)("kindly select subjects");
+  
+  newClassData.name = _name;
+
+
+  console.log("newClassData",newClassData);
+
+  allClassData.push(newClassData)
+
+  const allClassDataRaw = JSON.parse(allClassData)
+  localStorage.setItem("allClassData", allClassDataRaw)
+
+  alert("class added successfully")
+  
+})
