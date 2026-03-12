@@ -145,11 +145,47 @@ const classRawData = localStorage.getItem("allClassData");
 const allClassData = classRawData ? JSON.stringify(classRawData) : [];
 
 const allChips = document.querySelectorAll(".chip");
+newClassData.id = 
+crypto.randomUUID();
+newClassData.name = _name
 
 const newClassData = {
+  id: "",
   name: "",
   subjects: [],
 };
+function getClasses(){
+  return
+  JSON.parse(localStorage.getItem("allCLassData")) || [];
+}
+function saveClasses(classes){
+  localStorage.setItem("allClassData", JSON.stringify(classes));
+}
+
+function renderClasses() {
+  const classes = getClasses();
+
+  const tableBody = 
+  document.getElementById("student_table_body");
+
+  tableBody.innerHTML = "";
+
+  classes.forEach((cls) => {
+    const row = `
+    <tr>
+      <td>${cls.id}</td>
+      <td>${cls.name}</td>
+      <td>${subject.name}</td>
+      <td>
+        <button class="edit_btn" data-id="${subject.id}">Edit</button>
+        <button class="delete_btn" data-id="${subject.id}">Delete</button>
+      </td>
+    </tr>
+    `;
+    tableBody.innerHTML += row;
+  });
+}
+
 
 allChips.forEach((chip) => {
   // console.log(chip);
