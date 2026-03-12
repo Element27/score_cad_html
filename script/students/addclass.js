@@ -138,35 +138,36 @@ function renderSubjectChips() {
 rendersubjects();
 renderSubjectChips();
 
-
 // this should be in a function
-const classRawData = localStorage.getItem("allClassData");
-
-const allClassData = classRawData ? JSON.stringify(classRawData) : [];
 
 const allChips = document.querySelectorAll(".chip");
-newClassData.id = 
-crypto.randomUUID();
-newClassData.name = _name
+// newClassData.id =
+
+// newClassData.name = _name
 
 const newClassData = {
-  id: "",
+  id: crypto.randomUUID(),
   name: "",
   subjects: [],
 };
-function getClasses(){
-  return
-  JSON.parse(localStorage.getItem("allCLassData")) || [];
+function getClasses() {
+  const classRawData = localStorage.getItem("allClassData");
+
+  const allClassData = classRawData ? JSON.parse(classRawData) : [];
+return allClassData;
+  // return  JSON.parse(localStorage.getItem("allCLassData")) || [];
 }
-function saveClasses(classes){
+
+console.log(getClasses());
+
+function saveClasses(classes) {
   localStorage.setItem("allClassData", JSON.stringify(classes));
 }
 
 function renderClasses() {
   const classes = getClasses();
 
-  const tableBody = 
-  document.getElementById("student_table_body");
+  const tableBody = document.getElementById("student_table_body");
 
   tableBody.innerHTML = "";
 
@@ -185,7 +186,6 @@ function renderClasses() {
     tableBody.innerHTML += row;
   });
 }
-
 
 allChips.forEach((chip) => {
   // console.log(chip);
@@ -207,28 +207,23 @@ allChips.forEach((chip) => {
       newClassData.subjects.push(chip_id);
       chip.classList.toggle("chip_active");
     }
-
   });
 });
 
-
-addClassBtn.addEventListener("click", ()=> {
-
+addClassBtn.addEventListener("click", () => {
   const _name = classInput.value;
-  
-  if(_name.length < 1) alert("enter a valid name");
-  if(newClassData.length < 1)("kindly select subjects");
-  
+
+  if (_name.length < 1) alert("enter a valid name");
+  if (newClassData.length < 1) "kindly select subjects";
+
   newClassData.name = _name;
 
+  console.log("newClassData", newClassData);
 
-  console.log("newClassData",newClassData);
+  allClassData.push(newClassData);
 
-  allClassData.push(newClassData)
+  const allClassDataRaw = JSON.stringify(allClassData);
+  localStorage.setItem("allClassData", allClassDataRaw);
 
-  const allClassDataRaw = JSON.parse(allClassData)
-  localStorage.setItem("allClassData", allClassDataRaw)
-
-  alert("class added successfully")
-  
-})
+  alert("class added successfully");
+});
