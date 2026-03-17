@@ -135,8 +135,31 @@ function renderSubjectChips() {
   }
 }
 
+function attachChipEvents() {
+  const allChips = document.querySelectorAll(".chip");
+
+  allChips.forEach((chip) => {
+    chip.addEventListener("click", function () {
+      const chip_id = this.dataset.id;
+
+      const idExist = newClassData.subjects.includes(chip_id);
+
+      if (idExist) {
+        newClassData.subjects = newClassData.subjects.filter(
+          (id) => id !== chip_id
+        );
+      } else {
+        newClassData.subjects.push(chip_id);
+      }
+
+      this.classList.toggle("chip_active");
+    });
+  });
+}
+
 rendersubjects();
 renderSubjectChips();
+attachChipEvents();
 
 // this should be in a function
 
@@ -163,20 +186,24 @@ console.log(getClasses());
 function saveClasses(classes) {
   localStorage.setItem("allClassData", JSON.stringify(classes));
 }
-
+const tableBody = document.getElementById("student_table_body");
 function renderClasses() {
   const classes = getClasses();
-
-  const tableBody = document.getElementById("student_table_body");
-
+const subjects = getSubjects();
   tableBody.innerHTML = "";
 
   classes.forEach((cls) => {
+    const subjectNames = cls.subjects.map((id) => {
+      const subject = subjects.find((s) => s.id === id);
+      return subject ?
+      subject.name : "";
+    })  .join(",");
+
     const row = `
     <tr>
       <td>${cls.id}</td>
       <td>${cls.name}</td>
-      <td>${subject.name}</td>
+      <td>${subjectNames}</td>
       <td>
         <button class="edit_btn" data-id="${subject.id}">Edit</button>
         <button class="delete_btn" data-id="${subject.id}">Delete</button>
@@ -186,6 +213,7 @@ function renderClasses() {
     tableBody.innerHTML += row;
   });
 }
+
 
 allChips.forEach((chip) => {
   // console.log(chip);
@@ -211,19 +239,35 @@ allChips.forEach((chip) => {
 });
 
 addClassBtn.addEventListener("click", () => {
-  const _name = classInput.value;
+  const _name = classInput.value.trim();
 
-  if (_name.length < 1) alert("enter a valid name");
-  if (newClassData.length < 1) "kindly select subjects";
+  if (_name.length < 1) {
+    alert("enter a valid name");
+    return;
+  }
 
-  newClassData.name = _name;
+  if (newClassData.subjects.length < 1){
+    alert("Kindly select subjects")
+    return;
+  };
 
-  console.log("newClassData", newClassData);
+  const allClassData = {
+    id: crypto.randomUUID(),
+    name: _name,
+    subjects: newClassData.subjects
+  };
 
-  allClassData.push(newClassData);
+  allClassData.push(newClass);
 
-  const allClassDataRaw = JSON.stringify(allClassData);
-  localStorage.setItem("allClassData", allClassDataRaw);
+  saveClasses(allClassData);
 
-  alert("class added successfully");
+  renderClasses();
+
+  classInput.value = "";
+
+  newClassData.subjects = [];
 });
+
+
+renderClasses();
+renderSubjectChips();
