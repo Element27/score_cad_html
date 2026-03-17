@@ -7,6 +7,8 @@ function getSubjects() {
   return JSON.parse(localStorage.getItem("subjects")) || [];
 }
 
+const allChips = document.querySelectorAll(".chip");
+
 function saveSubjects(subjects) {
   localStorage.setItem("subjects", JSON.stringify(subjects));
 }
@@ -127,7 +129,7 @@ function renderSubjectChips() {
   if (subjects.length > 0) {
     const chipsItem = subjects
       .map((sub) => {
-        return `<span class="chip" data-id=${sub.id}>${sub.name}</span>`;
+        return `<span class="chip" data-id=${sub.id} onclick="toggleChip(this)">${sub.name}</span>`;
       })
       .join("");
 
@@ -135,49 +137,45 @@ function renderSubjectChips() {
   }
 }
 
-function attachChipEvents() {
-  const allChips = document.querySelectorAll(".chip");
-
-  allChips.forEach((chip) => {
-    chip.addEventListener("click", function () {
-      const chip_id = this.dataset.id;
-
-      const idExist = newClassData.subjects.includes(chip_id);
-
-      if (idExist) {
-        newClassData.subjects = newClassData.subjects.filter(
-          (id) => id !== chip_id
-        );
-      } else {
-        newClassData.subjects.push(chip_id);
-      }
-
-      this.classList.toggle("chip_active");
-    });
-  });
-}
-
 rendersubjects();
 renderSubjectChips();
-attachChipEvents();
-
-// this should be in a function
-
-const allChips = document.querySelectorAll(".chip");
-// newClassData.id =
-
-// newClassData.name = _name
-
+// attachChipEvents();
 const newClassData = {
   id: crypto.randomUUID(),
   name: "",
   subjects: [],
 };
+
+function toggleChip(chip) {
+  const chip_id = chip.dataset.id;
+  console.log("click", chip_id);
+
+  const idExist = newClassData.subjects.includes(chip_id);
+
+  console.log(idExist);
+
+  if (idExist) {
+    newClassData.subjects = newClassData.subjects.filter(
+      (id) => id !== chip_id,
+    );
+    chip.classList.toggle("chip_active");
+  } else {
+    newClassData.subjects.push(chip_id);
+    chip.classList.toggle("chip_active");
+  }
+}
+
+// this should be in a function
+
+// newClassData.id =
+
+// newClassData.name = _name
+
 function getClasses() {
   const classRawData = localStorage.getItem("allClassData");
 
   const allClassData = classRawData ? JSON.parse(classRawData) : [];
-return allClassData;
+  return allClassData;
   // return  JSON.parse(localStorage.getItem("allCLassData")) || [];
 }
 
@@ -186,18 +184,21 @@ console.log(getClasses());
 function saveClasses(classes) {
   localStorage.setItem("allClassData", JSON.stringify(classes));
 }
+
 const tableBody = document.getElementById("student_table_body");
+
 function renderClasses() {
   const classes = getClasses();
-const subjects = getSubjects();
+  const subjects = getSubjects();
   tableBody.innerHTML = "";
 
   classes.forEach((cls) => {
-    const subjectNames = cls.subjects.map((id) => {
-      const subject = subjects.find((s) => s.id === id);
-      return subject ?
-      subject.name : "";
-    })  .join(",");
+    const subjectNames = cls.subjects
+      .map((id) => {
+        const subject = subjects.find((s) => s.id === id);
+        return subject ? subject.name : "";
+      })
+      .join(",");
 
     const row = `
     <tr>
@@ -205,8 +206,8 @@ const subjects = getSubjects();
       <td>${cls.name}</td>
       <td>${subjectNames}</td>
       <td>
-        <button class="edit_btn" data-id="${subject.id}">Edit</button>
-        <button class="delete_btn" data-id="${subject.id}">Delete</button>
+        <button class="edit_btn" data-id="${cls.id}">Edit</button>
+        <button class="delete_btn" data-id="${cls.id}">Delete</button>
       </td>
     </tr>
     `;
@@ -214,29 +215,33 @@ const subjects = getSubjects();
   });
 }
 
+// function attachChipEvents() {
+//   allChips.forEach((chip) => {
+//     console.log(chip);
 
-allChips.forEach((chip) => {
-  // console.log(chip);
+//     chip.addEventListener("click", function () {
+//       console.log("clicked");
+//       const chip_id = this.dataset.id;
+//       console.log("click", chip_id);
 
-  chip.addEventListener("click", function () {
-    const chip_id = this.dataset.id;
-    // console.log("click", chip_id);
+//       const idExist = newClassData.subjects.includes(chip_id);
 
-    const idExist = newClassData.subjects.includes(chip_id);
+//       console.log(idExist);
 
-    console.log(idExist);
+//       if (idExist) {
+//         newClassData.subjects = newClassData.subjects.filter(
+//           (id) => id !== chip_id,
+//         );
+//         chip.classList.toggle("chip_active");
+//       } else {
+//         newClassData.subjects.push(chip_id);
+//         chip.classList.toggle("chip_active");
+//       }
+//     });
+//   });
+// }
 
-    if (idExist) {
-      newClassData.subjects = newClassData.subjects.filter(
-        (id) => id !== chip_id,
-      );
-      chip.classList.toggle("chip_active");
-    } else {
-      newClassData.subjects.push(chip_id);
-      chip.classList.toggle("chip_active");
-    }
-  });
-});
+const getAllClassData = getClasses();
 
 addClassBtn.addEventListener("click", () => {
   const _name = classInput.value.trim();
@@ -246,20 +251,20 @@ addClassBtn.addEventListener("click", () => {
     return;
   }
 
-  if (newClassData.subjects.length < 1){
-    alert("Kindly select subjects")
+  if (newClassData.subjects.length < 1) {
+    alert("Kindly select subjects");
     return;
-  };
+  }
 
   const allClassData = {
     id: crypto.randomUUID(),
     name: _name,
-    subjects: newClassData.subjects
+    subjects: newClassData.subjects,
   };
 
-  allClassData.push(newClass);
+  getAllClassData.push(allClassData);
 
-  saveClasses(allClassData);
+  saveClasses(getAllClassData);
 
   renderClasses();
 
@@ -267,7 +272,6 @@ addClassBtn.addEventListener("click", () => {
 
   newClassData.subjects = [];
 });
-
 
 renderClasses();
 renderSubjectChips();
