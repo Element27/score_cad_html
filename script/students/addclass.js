@@ -213,6 +213,7 @@ function renderClasses() {
     `;
     tableBody.innerHTML += row;
   });
+  attachCLassDeleteEvents()
 }
 
 // function attachChipEvents() {
@@ -272,6 +273,25 @@ addClassBtn.addEventListener("click", () => {
 
   newClassData.subjects = [];
 });
+
+function attachCLassDeleteEvents() {
+  const deleteButtons = document.querySelectorAll("#student_table_body .delete_btn");
+
+  deleteButtons.forEach((button) =>
+  {
+    button.addEventListener("click" , function () {
+      const id = this.dataset.id;
+
+      let classes = getClasses();
+
+      classes = classes.filter((cls) => cls.id !== id);
+      
+      saveClasses(classes);
+
+      renderClasses();
+    });
+  });
+}
 
 renderClasses();
 renderSubjectChips();
