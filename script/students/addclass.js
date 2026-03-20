@@ -214,6 +214,7 @@ function renderClasses() {
     tableBody.innerHTML += row;
   });
   attachCLassDeleteEvents()
+  attachClassEditEvents()
 }
 
 // function attachChipEvents() {
@@ -263,6 +264,33 @@ addClassBtn.addEventListener("click", () => {
     subjects: newClassData.subjects,
   };
 
+  let classes = getClasses();
+
+  if (classToEdit) {
+    classes = classes.map((cls) => {
+      if (cls.id === classToEdit.id)
+      {
+        return{
+          ...cls,
+          name: _name,
+          subjects:
+          newClassData.subjects,
+        };
+      }
+      return cls;
+    });
+    classToEdit = null;
+  } else {
+    const newClass = {
+    id: crypto.randomUUID(),
+    name: _name,
+    subjects: newClassData.subjects,
+  };
+
+  classes.push(newClass);
+
+  }
+
   getAllClassData.push(allClassData);
 
   saveClasses(getAllClassData);
@@ -272,6 +300,11 @@ addClassBtn.addEventListener("click", () => {
   classInput.value = "";
 
   newClassData.subjects = [];
+
+  document.querySelectorAll(".chip").forEach((chip) => {
+
+    chip.classList.remove("chip_active");
+  });
 });
 
 function attachCLassDeleteEvents() {
@@ -289,6 +322,39 @@ function attachCLassDeleteEvents() {
       saveClasses(classes);
 
       renderClasses();
+    });
+  });
+}
+
+let classToEdit = null;
+
+function attachClassEditEvents() {
+  const editButtons = document.querySelectorAll("#student_table_body .edit_btn");
+
+  editButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const id = this.dataset.id;
+    const classes = getClasses();
+      classToEdit = classes.find((cls) => cls.id === id);
+      // const newName = prompt("Enter new subject name", subjectToEdit.name);
+      classInput.value = classToEdit.name;
+
+      newClassData.subjects = [];
+
+      document.querySelectorAll(".chip").forEach((chip) => {
+        chip.classList.remove("chip_active");
+      });
+
+      classToEdit.subjects.forEach((subId) => {
+        const chip = 
+        document.querySelector(`chip[data-id="${subId}"]`);
+        if (chip) {
+
+          chip.classList.add("chip_active");
+
+          newClassData.subjects.push(subId);
+        }
+      });
     });
   });
 }
