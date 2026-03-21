@@ -9,7 +9,7 @@ const fetchAllStudent = () => {
   return allStudentData;
 };
 
-const addNewStudent = ({ name, gender, dob, studentClass }) => {
+const addNewStudent = ({ name, gender, dob, studentClass, subject }) => {
   const student_id = crypto.randomUUID();
 
   // console.log("studentName", name);
@@ -25,7 +25,7 @@ const addNewStudent = ({ name, gender, dob, studentClass }) => {
     gender: gender,
     dob: dob,
     class: studentClass,
-    subject: [],
+    subject: subject,
   };
 
   allStudentData.push(studentData);
@@ -54,15 +54,15 @@ const deleteStudent = ({ id }) => {
   window.location.reload();
 };
 
-const editStudent = ({ name, gender, dob, studentClass, id }) => {
+const editStudent = ({ name, gender, dob, studentClass, subject, id }) => {
   //json (javascript object notation)
   const studentData = {
-    id:id,
+    id: id,
     name: name,
     gender: gender,
     dob: dob,
     class: studentClass,
-    subject: [],
+    subject: subject,
   };
 
   // const stdEdit = allStudentData.find((std) => std.id === id);
@@ -71,15 +71,15 @@ const editStudent = ({ name, gender, dob, studentClass, id }) => {
   // stdEdit.gender = gender;
   // stdEdit.dob = dob;
   // stdEdit.class = studentClass;
-  
-  console.log("id",id)
+
+  console.log("id", id)
   const stdEdit = allStudentData.filter((std) => std.id !== id);
 
   // allStudentData.push(stdEdit);
-  
-  
+
+
   stdEdit.push(studentData);
-  console.log("stdEdit",stdEdit)
+  console.log("stdEdit", stdEdit)
 
   localStorage.setItem("allStudentData", JSON.stringify(stdEdit));
 
