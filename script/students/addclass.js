@@ -120,6 +120,7 @@ function attachEditEvents() {
 
 const classInput = document.getElementById("class_input");
 const addClassBtn = document.getElementById("add_class_btn");
+const editClassBtn = document.getElementById("edit_class_button");
 
 function renderSubjectChips() {
   const subjects = getSubjects();
@@ -214,7 +215,7 @@ function renderClasses() {
     tableBody.innerHTML += row;
   });
   attachCLassDeleteEvents()
-  attachClassEditEvents()
+  // attachClassEditEvents()
 }
 
 // function attachChipEvents() {
@@ -326,38 +327,57 @@ function attachCLassDeleteEvents() {
   });
 }
 
+
+
+// function attachClassEditEvents() {
+//   const editButtons = document.querySelectorAll("#student_table_body .edit_btn");
+
+//   editButtons.forEach((button) => {
+//     button.addEventListener("click", function () {
+//       const id = this.dataset.id;
+//     const classes = getClasses();
+//       classToEdit = classes.find((cls) => cls.id === id);
+//       // const newName = prompt("Enter new subject name", subjectToEdit.name);
+//       classInput.value = classToEdit.name;
+
+//       newClassData.subjects = [];
+
+//       document.querySelectorAll(".chip").forEach((chip) => {
+//         chip.classList.remove("chip_active");
+//       });
+
+//       classToEdit.subjects.forEach((subId) => {
+//         const chip = 
+//         document.querySelector(`chip[data-id="${subId}"]`);
+//         if (chip) {
+
+//           chip.classList.add("chip_active");
+
+//           newClassData.subjects.push(subId);
+//         }
+//       });
+//     });
+//   });
+// }
+
 let classToEdit = null;
-
-function attachClassEditEvents() {
-  const editButtons = document.querySelectorAll("#student_table_body .edit_btn");
-
-  editButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const id = this.dataset.id;
-    const classes = getClasses();
-      classToEdit = classes.find((cls) => cls.id === id);
-      // const newName = prompt("Enter new subject name", subjectToEdit.name);
-      classInput.value = classToEdit.name;
-
-      newClassData.subjects = [];
-
-      document.querySelectorAll(".chip").forEach((chip) => {
-        chip.classList.remove("chip_active");
-      });
-
-      classToEdit.subjects.forEach((subId) => {
-        const chip = 
-        document.querySelector(`chip[data-id="${subId}"]`);
-        if (chip) {
-
-          chip.classList.add("chip_active");
-
-          newClassData.subjects.push(subId);
-        }
-      });
-    });
-  });
-}
+editClassBtn.addEventListener("click", function () {
+  const name = classInput.value.trim();
+  console.log(classToEdit);
+  if (name.length === 0) {
+    alert("please enter class name");
+    return;
+  }
+  classToEdit.name = name;
+  const classes = getSubjects();
+  let updatedClasses = classes.filter((s) => s.id !== classToEdit.id);
+  console.log(updatedClasses);
+  updatedClasses = [...updatedClasses, classToEdit];
+  console.log(updatedClasses);
+  localStorage.setItem("classes", JSON.stringify(updatedClasses));
+  classInput.value = "";
+  renderClasses();
+});
 
 renderClasses();
 renderSubjectChips();
