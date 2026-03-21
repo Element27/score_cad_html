@@ -18,6 +18,7 @@ Read
  C- controller (connection)
 */
 
+import { getSubjects, getClasses } from "../class_and_subjects/classAndStudentFunctions.js";
 import {
   fetchAllStudent,
   addNewStudent,
@@ -30,17 +31,24 @@ const studentDOB = document.getElementById("student_dob");
 const studentClass = document.getElementById("student_class");
 const cancelBtn = document.getElementById("cancel_btn");
 const saveBtn = document.getElementById("save_btn");
+const classSelect = document.getElementById("student_class");
 
 // const rawStudentData = localStorage.getItem("allStudentData");
 // console.log("rawStudentData", rawStudentData);
 
+
+
+
 const allStudentData = fetchAllStudent();
+const getAllSubjects = getSubjects();
+const getAllClasses = getClasses();
+let filteredStudentData = allStudentData;
 
 const table_body = document.getElementById("student_table_body");
 
 const populateStudentData = () => {
-  if (allStudentData.length > 0) {
-    const mappedData = allStudentData
+  if (filteredStudentData.length > 0) {
+    const mappedData = filteredStudentData
       .map((data) => {
         return `<tr>
             <td>${data.id}</td>
@@ -105,11 +113,28 @@ saveBtn &&
       return;
     }
 
+    let subjects = []
+
+    const sel_class = getAllClasses.find((c) => c.id === studentClass.value)
+
+    sel_class.subjects.forEach((sId, i) => {
+      const sub = getAllSubjects.find((subDetail) => subDetail.id === sId)
+      subjects.push({
+        name: sub ? sub.name : "Unknown Subject",
+        ca_score: 0,
+        exam_score: 0,
+        total_score: 0,
+        sub_id: sId
+      })
+    })
+
+
     addNewStudent({
       name: studentName.value,
       gender: studentGender.value,
       dob: studentDOB.value,
       studentClass: studentClass.value,
+      subject: subjects,
     });
   });
 
@@ -134,38 +159,86 @@ editBtns.forEach((btn) => {
 
 const classDropdown = document.getElementById("student_class");
 
-function loadClasses() {
+export function loadClasses() {
+  const classOPtions = getAllClasses.map((c, i) => `<option value=${c.id}> ${c.name}</option>`).join("")
 
-  let classes = JSON.parse(localStorage.getItem("classes")) || [];
-  classes.forEach(function(cls){
-
-    const option = document.createElement("option");
-    option.value = cls.name;
-    option.textContent = cls.name;
-    classDropdown.appendChild(option);
-  });
+  if (classSelect) classSelect.innerHTML = "<option value=''>Select Class</option>" + classOPtions;
 }
 
 loadClasses();
 
 const subjectContainer = document.querySelector(".subject-tags");
-classDropdown.addEventListener("change", function() {
-const selectedClassName = classDropdown.value;
+if (classDropdown) classDropdown.addEventListener("change", function () {
 
-let classes = JSON.parse(localStorage.getItem("classes")) || [];
+  const sel_id = classDropdown.value;
 
-const selectedClass = classes.find(function(cls){
-  return cls.name === selectedClassName;
-});
+  console.log(sel_id)
 
-subjectContainer.innerHTML = "";
-if (selectedClass) {
-  selectedClass.subjects.forEach(function(subject){
+  const selectedClass = getAllClasses.find((c, i) => c.id === sel_id)
+
+  console.log(selectedClass)
+
+  let subjects = []
+
+  selectedClass.subjects.forEach((s, i) => {
+    const sub = getAllSubjects.find((sub) => sub.id === s)
+    console.log("sub", sub)
+    subjects.push(sub.name)
+  })
+
+  console.log(subjects)
+
+
+  subjectContainer.innerHTML = "";
+  // if (selectedClass) {
+  subjects.forEach(function (subject) {
     const tag = document.createElement("span");
-    tag.classList.add("chip");
+    tag.classList.add("chip_tag");
+    // tag.classList.add("tag");
     tag.textContent = subject;
 
     subjectContainer.appendChild(tag);
   });
-}
+
 });
+
+
+const subjectFilter = document.getElementById("subject_filter");
+
+export function loadSubjectFilter() {
+  const subjectOPtions = getAllSubjects.map((s, i) => `<option value=${s.id}> ${s.name}</option>`).join("")
+  if (subjectFilter) subjectFilter.innerHTML = "<option value=''>Select Subject</option>" + subjectOPtions;
+}
+
+if (subjectFilter) {
+  subjectFilter.addEventListener("change", function () {
+    const sel_id = subjectFilter.value;
+
+    if (sel_id === "") {
+      filteredStudentData = allStudentData
+      populateStudentData()
+      return
+    }
+    console.log(sel_id)
+
+    const studentList = allStudentData.filter((s, i) => {
+      let std = s.subject.find((sub) => sub.sub_id === sel_id)
+      return std
+
+    })
+    console.log(studentList)
+
+    if (studentList.length > 0) {
+      filteredStudentData = studentList
+      populateStudentData()
+    } else {
+      table_body.innerHTML = "<tr><td colspan='6'>No student found</td></tr>"
+    }
+
+    // const selectedSubject = getAllSubjects.find((s, i) => s.id === sel_id)
+    // console.log(selectedSubject)
+  })
+}
+
+
+loadSubjectFilter();

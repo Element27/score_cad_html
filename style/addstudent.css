@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -26,18 +26,19 @@ body {
     border: none;
     cursor: pointer;
 }
+
 img {
     margin-right: auto;
     padding-right: 0%;
 }
 
-#header{
+#header {
     display: flex;
     align-items: center;
 }
 
-#border{
-    border:none;
+#border {
+    border: none;
     background-color: #d0e4db;
     width: 80%;
     border-radius: 25px;
@@ -46,7 +47,7 @@ img {
     padding: 30px;
 }
 
-#container{
+#container {
     display: flex;
     margin: 5vh 3vw;
     justify-content: space-between;
@@ -71,7 +72,7 @@ img {
     padding: 10px;
     font-size: 16px;
     background-color: transparent;
-    border: none;   
+    border: none;
 }
 
 #sideNav ul li button:hover {
@@ -105,7 +106,7 @@ img {
     transition: 10ms;
 }
 
-.cards{
+.cards {
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     background-color: white;
@@ -128,14 +129,14 @@ img {
     font-weight: bold;
 }
 
-.small-2{
+.small-2 {
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     background-color: #FFD1CC;
     padding: 10px;
 }
 
-.borders{
+.borders {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -153,7 +154,7 @@ img {
     padding: 20px;
     border-radius: 15px;
     flex: 1;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .full-width {
@@ -168,7 +169,8 @@ img {
 }
 
 /* Input Styling */
-input, select {
+input,
+select {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
@@ -185,8 +187,11 @@ input, select {
     gap: 8px;
 }
 
-.tag input { display: none; }
-.tag span {
+.tag input {
+    display: none;
+}
+
+.chip_tag {
     padding: 8px 15px;
     background: #f0f0f0;
     border-radius: 20px;
@@ -195,7 +200,7 @@ input, select {
     display: inline-block;
 }
 
-.tag input:checked + span {
+.tag input:checked+span {
     background: #98ff98;
     font-weight: bold;
 }
