@@ -18,7 +18,10 @@ Read
  C- controller (connection)
 */
 
-import { getSubjects, getClasses } from "../class_and_subjects/classAndStudentFunctions.js";
+import {
+  getSubjects,
+  getClasses,
+} from "../class_and_subjects/classAndStudentFunctions.js";
 import {
   fetchAllStudent,
   addNewStudent,
@@ -32,14 +35,53 @@ const studentClass = document.getElementById("student_class");
 const cancelBtn = document.getElementById("cancel_btn");
 const saveBtn = document.getElementById("save_btn");
 const classSelect = document.getElementById("student_class");
+const classDropdown = document.getElementById("student_class");
 
 // const rawStudentData = localStorage.getItem("allStudentData");
 // console.log("rawStudentData", rawStudentData);
 
-
-
-
 const allStudentData = fetchAllStudent();
+let sel_id;
+let selectedSubjectId = null;
+
+if (classDropdown) {
+  sel_id = classDropdown.value;
+}
+
+const persistStudentData = () => {
+  localStorage.setItem("allStudentData", JSON.stringify(allStudentData));
+};
+
+const getStudentById = (id) =>
+  allStudentData.find((student) => student.id === id);
+
+const updateScore = (studentId, type, value) => {
+  if (!selectedSubjectId) {
+    alert("Please select a subject to update scores");
+    return;
+  }
+  const student = getStudentById(studentId);
+  if (!student) return;
+
+  if (!student.subject || student.subject.length === 0) return;
+
+  const subject = student.subject.find((sub) => sub.sub_id === selectedSubjectId);
+
+  if (!subject) return;
+
+  const parsed = Number(value);
+  if (Number.isNaN(parsed)) return;
+
+  if (type === "CA") {
+    subject.ca_score = parsed;
+  } else if (type === "Exam") {
+    subject.exam_score = parsed;
+  }
+
+  subject.total_score =
+    Number(subject.ca_score || 0) + Number(subject.exam_score || 0);
+  persistStudentData();
+};
 const getAllSubjects = getSubjects();
 const getAllClasses = getClasses();
 let filteredStudentData = allStudentData;
@@ -50,12 +92,20 @@ const populateStudentData = () => {
   if (filteredStudentData.length > 0) {
     const mappedData = filteredStudentData
       .map((data) => {
+        const subject = selectedSubjectId
+          ? data.subject.find((sub) => sub.sub_id === selectedSubjectId)
+          : data.subject[0];
+        const caScore = subject ? subject.ca_score || "" : "";
+        const examScore = subject ? subject.exam_score || "" : "";
+        const totalScore = subject ? subject.total_score || "NA" : "NA";
+
         return `<tr>
             <td>${data.id}</td>
             <td>${data.name}</td>
-            <td><input type="text" placeholder="Enter score" /></td>
-            <td><input type="text" placeholder="Enter score" /></td>
-            <td>NA</td>
+            <td class="td_input_cont" id="td_input_CA_${data.id}">
+            <input type="number" min="0" max="100" id="ca_input_${data.id}" data-student-id="${data.id}" data-score-type="CA" placeholder="Enter score" value="${caScore}"   /> <span class="save_score_btn" data-student-id="${data.id}" data-score-type="CA">🗃️</span></td>
+            <td class="td_input_cont" id="td_input_Exam_${data.id}"><input type="number" min="0" max="100" id="exam_input_${data.id}" data-student-id="${data.id}" data-score-type="Exam" placeholder="Enter score" value="${examScore}"   /> <span class="save_score_btn" data-student-id="${data.id}" data-score-type="Exam">🗃️</span></td>
+            <td>${totalScore}</td>
             <td>
               <div class="button-b">
                 <button class="edit_btn" id="${data.id}">
@@ -95,6 +145,31 @@ const populateStudentData = () => {
 
 populateStudentData();
 
+if (table_body) {
+  table_body.addEventListener("click", (event) => {
+    const saveButton = event.target.closest(".save_score_btn");
+    if (!saveButton) return;
+
+    const studentId = saveButton.dataset.studentId;
+    const scoreType = saveButton.dataset.scoreType;
+    const input = document.getElementById(
+      `${scoreType.toLowerCase()}_input_${studentId}`,
+    );
+
+    if (!input) return;
+
+    const value = input.value.trim();
+    if (value === "") {
+      alert("Enter a score before saving");
+      return;
+    }
+
+    updateScore(studentId, scoreType, value);
+    populateStudentData();
+    alert(`Saved ${scoreType} score for student ${studentId}`);
+  });
+}
+
 // console.log("allStudentData", allStudentData);
 
 saveBtn &&
@@ -113,21 +188,20 @@ saveBtn &&
       return;
     }
 
-    let subjects = []
+    let subjects = [];
 
-    const sel_class = getAllClasses.find((c) => c.id === studentClass.value)
+    const sel_class = getAllClasses.find((c) => c.id === studentClass.value);
 
     sel_class.subjects.forEach((sId, i) => {
-      const sub = getAllSubjects.find((subDetail) => subDetail.id === sId)
+      const sub = getAllSubjects.find((subDetail) => subDetail.id === sId);
       subjects.push({
         name: sub ? sub.name : "Unknown Subject",
         ca_score: 0,
         exam_score: 0,
         total_score: 0,
-        sub_id: sId
-      })
-    })
-
+        sub_id: sId,
+      });
+    });
 
     addNewStudent({
       name: studentName.value,
@@ -157,88 +231,89 @@ editBtns.forEach((btn) => {
   });
 });
 
-const classDropdown = document.getElementById("student_class");
-
 export function loadClasses() {
-  const classOPtions = getAllClasses.map((c, i) => `<option value=${c.id}> ${c.name}</option>`).join("")
+  const classOPtions = getAllClasses
+    .map((c, i) => `<option value=${c.id}> ${c.name}</option>`)
+    .join("");
 
-  if (classSelect) classSelect.innerHTML = "<option value=''>Select Class</option>" + classOPtions;
+  if (classSelect)
+    classSelect.innerHTML =
+      "<option value=''>Select Class</option>" + classOPtions;
 }
 
 loadClasses();
 
 const subjectContainer = document.querySelector(".subject-tags");
-if (classDropdown) classDropdown.addEventListener("change", function () {
+if (classDropdown)
+  classDropdown.addEventListener("change", function () {
+    sel_id = classDropdown.value;
+    console.log(sel_id);
 
-  const sel_id = classDropdown.value;
+    const selectedClass = getAllClasses.find((c, i) => c.id === sel_id);
 
-  console.log(sel_id)
+    console.log(selectedClass);
 
-  const selectedClass = getAllClasses.find((c, i) => c.id === sel_id)
+    let subjects = [];
 
-  console.log(selectedClass)
+    selectedClass.subjects.forEach((s, i) => {
+      const sub = getAllSubjects.find((sub) => sub.id === s);
+      console.log("sub", sub);
+      subjects.push(sub.name);
+    });
 
-  let subjects = []
+    console.log(subjects);
 
-  selectedClass.subjects.forEach((s, i) => {
-    const sub = getAllSubjects.find((sub) => sub.id === s)
-    console.log("sub", sub)
-    subjects.push(sub.name)
-  })
+    subjectContainer.innerHTML = "";
+    // if (selectedClass) {
+    subjects.forEach(function (subject) {
+      const tag = document.createElement("span");
+      tag.classList.add("chip_tag");
+      // tag.classList.add("tag");
+      tag.textContent = subject;
 
-  console.log(subjects)
-
-
-  subjectContainer.innerHTML = "";
-  // if (selectedClass) {
-  subjects.forEach(function (subject) {
-    const tag = document.createElement("span");
-    tag.classList.add("chip_tag");
-    // tag.classList.add("tag");
-    tag.textContent = subject;
-
-    subjectContainer.appendChild(tag);
+      subjectContainer.appendChild(tag);
+    });
   });
-
-});
-
 
 const subjectFilter = document.getElementById("subject_filter");
 
 export function loadSubjectFilter() {
-  const subjectOPtions = getAllSubjects.map((s, i) => `<option value=${s.id}> ${s.name}</option>`).join("")
-  if (subjectFilter) subjectFilter.innerHTML = "<option value=''>Select Subject</option>" + subjectOPtions;
+  const subjectOPtions = getAllSubjects
+    .map((s, i) => `<option value=${s.id}> ${s.name}</option>`)
+    .join("");
+  if (subjectFilter)
+    subjectFilter.innerHTML =
+      "<option value=''>Select Subject</option>" + subjectOPtions;
 }
 
 if (subjectFilter) {
   subjectFilter.addEventListener("change", function () {
     const sel_id = subjectFilter.value;
+    selectedSubjectId = sel_id;
 
     if (sel_id === "") {
-      filteredStudentData = allStudentData
-      populateStudentData()
-      return
+      filteredStudentData = allStudentData;
+      populateStudentData();
+      return;
     }
-    console.log(sel_id)
+    console.log(sel_id);
 
     const studentList = allStudentData.filter((s, i) => {
-      let std = s.subject.find((sub) => sub.sub_id === sel_id)
-      return std
-
-    })
-    console.log(studentList)
+      let std = s.subject.find((sub) => sub.sub_id === sel_id);
+      return std;
+    });
+    console.log(studentList);
 
     if (studentList.length > 0) {
-      filteredStudentData = studentList
-      populateStudentData()
+      filteredStudentData = studentList;
+      populateStudentData();
     } else {
-      table_body.innerHTML = "<tr><td colspan='6'>No student found</td></tr>"
+      table_body.innerHTML = "<tr><td colspan='6'>No student found</td></tr>";
     }
 
     // const selectedSubject = getAllSubjects.find((s, i) => s.id === sel_id)
     // console.log(selectedSubject)
-  })
+  });
 }
-
 
 loadSubjectFilter();

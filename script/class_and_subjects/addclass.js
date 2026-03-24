@@ -1,7 +1,7 @@
 /**
  * DATA MANAGEMENT (LocalStorage)
  */
-import { getSubjects, saveSubjects, getClasses, saveClasses } from "./classAndStudentFunctions";
+import { getSubjects, saveSubjects, getClasses, saveClasses } from "./classAndStudentFunctions.js";
 
 /**
  * SUBJECT MANAGEMENT
