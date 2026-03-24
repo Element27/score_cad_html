@@ -179,3 +179,15 @@ table input{
     text-decoration: none;
     color: inherit;
 }
+
+.td_input_cont {
+    position: relative;
+
+    span {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+}
